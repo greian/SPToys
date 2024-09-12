@@ -16,6 +16,9 @@ export default class ThemeColors extends React.Component<IThemeColorsProps, {}> 
     const siteTheme: ITheme = createTheme({ palette: ThemeColorsFromWindow });
     const palette = siteTheme.palette;
 
+    // Use the getObjectPropertiesAndValuesSafe method to get the properties and values
+    const paletteEntries = this.getObjectPropertiesAndValuesSafe(palette);
+
     const {
 
     } = this.props;
@@ -26,7 +29,10 @@ export default class ThemeColors extends React.Component<IThemeColorsProps, {}> 
           <div className='ms-Grid' dir='ltr'>
             <div className='ms-Grid-row'>
 
-              {this.getColorBlock(palette.themePrimary, 'themePrimary')}
+              {paletteEntries.map(({ key, value }) => (
+                value && typeof value === 'string' && value.indexOf('#') > -1 && this.getColorBlock(value as string, key)
+              ))}
+              {/* {this.getColorBlock(palette.themePrimary, 'themePrimary')}
               {this.getColorBlock(palette.themeSecondary, 'themeSecondary')}
               {this.getColorBlock(palette.themeTertiary, 'themeTertiary')}
 
@@ -61,7 +67,7 @@ export default class ThemeColors extends React.Component<IThemeColorsProps, {}> 
               {this.getColorBlock(palette.greenLight, 'greenLight')}
               {this.getColorBlock(palette.greenDark, 'greenDark')}
               {this.getColorBlock(palette.yellow, 'yellow')}
-              {this.getColorBlock(palette.yellowLight, 'yellowLight')}
+              {this.getColorBlock(palette.yellowLight, 'yellowLight')} */}
 
 
 
@@ -71,9 +77,21 @@ export default class ThemeColors extends React.Component<IThemeColorsProps, {}> 
       </>
 
     );
+
+    // function getObjectPropertiesAndValuesSafe<T extends Record<string, any>>(obj: T): void {
+    //   Object.keys(obj).forEach((key) => {
+    //     const value = obj[key as keyof T]; // Type-safe access
+    //     console.log(`Property Name: ${key}, Property Value: ${value}`);
+    //   });
+    // }
+  }
+
+  private getObjectPropertiesAndValuesSafe(obj: any): { key: string, value: any }[] {
+    return Object.keys(obj).map(key => ({ key, value: obj[key] }));
   }
 
   private getColorBlock(themeColor: string, themeName: string): JSX.Element {
+
     return (
       <div className='ms-Grid-col ms-md4'>
         <div style={{ padding: 10 }}>
