@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "theme-colors-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/themeColors/ThemeColorsWebPart.js",
+          "manifest": "./src/webparts/themeColors/ThemeColorsWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ThemeColorsWebPartStrings": "lib/webparts/themeColors/loc/{locale}.js"
+  }
+}
