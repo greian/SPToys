@@ -4,7 +4,7 @@
 
 This project is a SharePoint Framework web part that allows users to customize theme colors. It leverages modern web technologies to provide a seamless and interactive user experience.
 
-![Solution in Action](path/to/screenshot.png)
+![Solution in Action](images/theme-colors-web-part.png)
 
 ## Used SharePoint Framework Version
 
